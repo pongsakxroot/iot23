@@ -106,17 +106,24 @@ class BankNotificationExtractor:
         """
         Parse Thai date/time format
         Supports: DD/MM/YY, DD/MM/YYYY
-        Buddhist year (25xx) is converted to CE year
+        Buddhist year (25xx or 2-digit) is converted to CE year
+        
+        Examples:
+            17/09/69 -> พ.ศ. 2569 -> CE 2026
+            17/09/2569 -> CE 2026
+            17/09/2026 -> CE 2026
         """
         # Parse date parts
         day, month, year = map(int, date_str.split('/'))
         
         # Convert Buddhist year to CE if needed
         if year > 2400:
+            # Full 4-digit Buddhist year (e.g., 2569)
             year = year - 543
         elif year < 100:
-            # Two digit year
-            year = 2000 + year if year < 70 else 1900 + year
+            # Two-digit Buddhist year (e.g., 69 = พ.ศ. 2569)
+            # Add 2500 to get full Buddhist year, then convert to CE
+            year = year + 2500 - 543  # Simplified: year + 1957
         
         # Parse time
         time_parts = time_str.split(':')
