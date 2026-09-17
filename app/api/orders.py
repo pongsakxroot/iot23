@@ -18,7 +18,7 @@ router = APIRouter(prefix="/orders", tags=["orders"])
 class CreateOrderRequest(BaseModel):
     base_amount: float = Field(..., gt=0, description="Base amount in THB")
     customer_ref: Optional[str] = Field(None, max_length=255, description="Customer reference")
-    metadata: Optional[str] = Field(None, description="Optional JSON metadata")
+    order_metadata: Optional[str] = Field(None, description="Optional JSON metadata")
 
 
 class OrderResponse(BaseModel):
@@ -30,7 +30,7 @@ class OrderResponse(BaseModel):
     expires_at: datetime
     paid_at: Optional[datetime]
     customer_ref: Optional[str]
-    metadata: Optional[str]
+    order_metadata: Optional[str]
     
     class Config:
         from_attributes = True
@@ -52,7 +52,7 @@ async def create_order(
             db=db,
             base_amount=request.base_amount,
             customer_ref=request.customer_ref,
-            metadata=request.metadata
+            order_metadata=request.order_metadata
         )
         return order
     except ValueError as e:

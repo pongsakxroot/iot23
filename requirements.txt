@@ -1,33 +1,33 @@
 # FastAPI and server
-fastapi==0.109.0
-uvicorn[standard]==0.27.0
-python-multipart==0.0.6
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+python-multipart==0.0.12
 
 # Database
-sqlalchemy==2.0.25
-alembic==1.13.1
-psycopg2-binary==2.9.9
+sqlalchemy==2.0.36
+alembic==1.14.0
+psycopg2-binary==2.9.10; platform_machine != 'aarch64'
 
 # MQTT
-paho-mqtt==1.6.1
+paho-mqtt==2.1.0
 
 # Notifications
-requests==2.31.0
+requests==2.32.3
 
 # Email/IMAP
-imapclient==2.3.1
-email-validator==2.1.0
+imapclient==3.0.1
+email-validator==2.2.0
 
 # Configuration
-python-dotenv==1.0.0
-pydantic==2.5.3
-pydantic-settings==2.1.0
+python-dotenv==1.0.1
+pydantic==2.10.3
+pydantic-settings==2.6.1
 
 # Testing
-pytest==7.4.4
-pytest-asyncio==0.23.3
-httpx==0.26.0
+pytest==8.3.4
+pytest-asyncio==0.24.0
+httpx==0.28.0
 
 # Utilities
-python-dateutil==2.8.2
-pytz==2023.3
+python-dateutil==2.9.0
+pytz==2024.2

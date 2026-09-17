@@ -25,7 +25,7 @@ class OrderService:
         db: Session, 
         base_amount: float,
         customer_ref: Optional[str] = None,
-        metadata: Optional[str] = None
+        order_metadata: Optional[str] = None
     ) -> Order:
         """
         Create a new order with unique random cent amount
@@ -34,7 +34,7 @@ class OrderService:
             db: Database session
             base_amount: Base amount (e.g., 100.00)
             customer_ref: Optional customer reference
-            metadata: Optional JSON metadata string
+            order_metadata: Optional JSON metadata string
         
         Returns:
             Created Order with unique expected_amount
@@ -66,7 +66,7 @@ class OrderService:
             created_at=created_at,
             expires_at=expires_at,
             customer_ref=customer_ref,
-            metadata=metadata
+            order_metadata=order_metadata
         )
         
         db.add(order)

@@ -171,11 +171,11 @@ class TestOrderService:
             self.db,
             base_amount=100.0,
             customer_ref="CUST-12345",
-            metadata='{"product": "coffee"}'
+            order_metadata='{"product": "coffee"}'
         )
         
         assert order.customer_ref == "CUST-12345"
-        assert order.metadata == '{"product": "coffee"}'
+        assert order.order_metadata == '{"product": "coffee"}'
     
     def test_max_unique_amounts(self):
         """Test behavior when approaching maximum unique amounts"""

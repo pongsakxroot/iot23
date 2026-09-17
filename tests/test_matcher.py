@@ -217,7 +217,7 @@ class TestTransactionMatcher:
     
     def test_most_recent_order_matched(self):
         """Test that most recent matching order is selected"""
-        # Create two pending orders with same amount
+        # Create two pending orders with different amounts
         order1 = Order(
             base_amount=100.0,
             expected_amount=100.25,
@@ -227,7 +227,7 @@ class TestTransactionMatcher:
         )
         order2 = Order(
             base_amount=100.0,
-            expected_amount=100.25,
+            expected_amount=100.47,  # Different amount (unique constraint)
             status=OrderStatus.PENDING,
             created_at=datetime.utcnow() - timedelta(minutes=2),  # More recent
             expires_at=datetime.utcnow() + timedelta(minutes=8)
@@ -235,11 +235,11 @@ class TestTransactionMatcher:
         self.db.add_all([order1, order2])
         self.db.commit()
         
-        # Create transaction
+        # Create transaction matching second order
         transaction = Transaction(
             raw_payload="Test",
             source=TransactionSource.MACRODROID,
-            extracted_amount=100.25,
+            extracted_amount=100.47,  # Matches order2
             matched=False
         )
         self.db.add(transaction)
@@ -249,9 +249,9 @@ class TestTransactionMatcher:
         matched_order = self.matcher.match_transaction(
             self.db,
             transaction,
-            100.25,
+            100.47,  # Matches order2
             datetime.utcnow()
         )
         
         assert matched_order is not None
-        assert matched_order.id == order2.id  # Most recent
+        assert matched_order.id == order2.id  # Should match the second order by amount

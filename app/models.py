@@ -35,7 +35,7 @@ class Order(Base):
     paid_at = Column(DateTime, nullable=True)
     
     customer_ref = Column(String(255), nullable=True)
-    metadata = Column(Text, nullable=True)
+    order_metadata = Column(Text, nullable=True)
     
     # Relationships
     transactions = relationship("Transaction", back_populates="order")
