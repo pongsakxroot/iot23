@@ -292,7 +292,7 @@ X-API-Key: your-api-key
 {
   "base_amount": 100.0,
   "customer_ref": "CUST-12345",
-  "metadata": "{\"product\": \"coffee\"}"
+  "order_metadata": "{\"product\": \"coffee\"}"
 }
 ```
 
@@ -307,7 +307,7 @@ X-API-Key: your-api-key
   "expires_at": "2024-01-15T10:40:00",
   "paid_at": null,
   "customer_ref": "CUST-12345",
-  "metadata": "{\"product\": \"coffee\"}"
+  "order_metadata": "{\"product\": \"coffee\"}"
 }
 ```
 
